@@ -38,11 +38,13 @@ Each step's findings are summarized in [Results](#results) as the project progre
 ## Repository structure
 
 ```
-├── data/raw/            # original CSVs (never modified)
-├── data/processed/      # cleaned outputs from the pipeline
-├── notebooks/           # step-by-step analysis notebooks
-├── src/                 # reusable cleaning / feature / stats code
-├── reports/             # figures and write-ups
+Wellbeing/
+├── wellbeingdata/              # original CSVs (never modified)
+├── processed/                  # cleaned outputs from the pipeline (Step 2+)
+├── reports/                    # issue log, figures, write-ups
+├── 01_data_profiling.ipynb     # Step 1: profiling & quality audit
+├── preprocessing.ipynb         # Step 2: cleaning & standardization
+├── requirements.txt
 └── README.md
 ```
 
@@ -55,7 +57,7 @@ The data covers signups from 2026-06-01 to 2026-10-31. Events run through the da
 | File | Grain | Rows (approx) |
 |---|---|---|
 | `users.csv` | one row per user (in theory) | 15.1k |
-| `events.csv.gz` | one row per client event | 604k |
+| `events.csv` | one row per client event | 604k |
 | `assessments.csv` | one row per survey submission | 15.6k |
 | `experiment_assignments.csv` | one row per assignment log | 4.3k |
 | `content.csv` | one row per practice or lesson | 120 |
@@ -77,7 +79,7 @@ The data covers signups from 2026-06-01 to 2026-10-31. Events run through the da
 | primary_goal | From onboarding |
 | source_system | `legacy` = account created on the old backend; `core` = new backend |
 
-### events.csv.gz
+### events.csv
 | Column | Description |
 |---|---|
 | event_id | Unique event ID |
