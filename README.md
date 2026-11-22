@@ -11,8 +11,8 @@ An end-to-end analytics project on a meditation and wellbeing app. It covers ins
 | Step | Topic | Status |
 |---|---|---|
 | 1 | Data profiling and quality audit | ✅ Done |
-| 2 | Cleaning and standardization | ⏳ In progress |
-| 3 | Feature engineering | ⬜ Not started |
+| 2 | Cleaning and standardization | ✅ Done |
+| 3 | Feature engineering | ⏳ In progress |
 | 4 | Retention and churn analysis | ⬜ Not started |
 | 5 | Engagement → wellbeing outcomes | ⬜ Not started |
 | 6 | A/B test: `onb_personal_plan_v1` | ⬜ Not started |
@@ -167,7 +167,22 @@ I profiled all six tables before changing anything, loading every column as a st
 **What I learned:** the most damaging issues didn't raise errors. Values that parse fine, scores that look plausible, and an A/B split that's only 6% off can each change a conclusion. The checks that caught them were *consistency* checks: items within a scale should agree, starts and completes should move together, and the experiment split should match the design.
 
 ### Step 2: Cleaning and standardization
-_To be added._
+Notebook: `preprocessing.ipynb` · Outputs: `processed/*.parquet`
+
+Every fix maps to an issue in the Step 1 log. **Order matters:** timestamps are fixed before date filtering and de-duplication, because both depend on correct times. Questionable records are **flagged rather than deleted** wherever a later analysis might still need them (low-effort surveys, the iOS tracking-gap window, unlogged experiment assignments).
+
+| Table | Raw rows | Clean rows | Main changes |
+|---|---|---|---|
+| users | 15,146 | 15,000 | −6 test accounts, −140 migration duplicates; explicit `not_answered` / `unknown` categories; `completed_onboarding` flag |
+| events | 603,906 | 551,903 | −664 without a user, −39,462 test-account events, −1,760 clock-skewed, −10,117 retry duplicates; v1 → v2 names; JSON parsed; ms → s; legacy local time → UTC; `in_ios_tracking_gap` flag |
+| assessments | 15,574 | 15,194 | `intake` → `baseline`; invalid codes → missing; reverse items corrected for v1 only; −380 resubmissions; 396 `low_effort` flags; pillar, Flourishing Index and PHQ-4 scores |
+| experiment | 4,306 logs | 4,416 users | Duplicates and re-assignments removed; variant rebuilt from the onboarding flow for all eligible users (+189 that weren't logged) |
+
+**Validation:** all 12 re-run checks pass, including these:
+- Legacy `app_install` times now match signup to the second.
+- Practice durations agree across tracking-plan versions (median 605s vs 601s).
+- Every survey item correlates **+0.65 to +0.67** with its scale. Before the fix, the reverse items were −0.57.
+- The rebuilt experiment split is **2,241 vs 2,175 (SRM p = 0.32)**, down from p ≈ 9e-5. 99.7% of logged assignments agree with the onboarding flow.
 
 ### Step 3: Feature engineering
 _To be added._
