@@ -10,8 +10,8 @@ An end-to-end analytics project on a meditation and wellbeing app. It covers ins
 
 | Step | Topic | Status |
 |---|---|---|
-| 1 | Data profiling and quality audit | ⏳ In progress |
-| 2 | Cleaning and standardization | ⬜ Not started |
+| 1 | Data profiling and quality audit | ✅ Done |
+| 2 | Cleaning and standardization | ⏳ In progress |
 | 3 | Feature engineering | ⬜ Not started |
 | 4 | Retention and churn analysis | ⬜ Not started |
 | 5 | Engagement → wellbeing outcomes | ⬜ Not started |
@@ -145,7 +145,26 @@ Eligibility: iOS and Android users who signed up between 2026-09-01 and 2026-09-
 ## Results
 
 ### Step 1: Data profiling and quality audit
-_To be added._
+Notebook: `01_data_profiling.ipynb` · Full log: [`reports/data_quality_log.csv`](reports/data_quality_log.csv)
+
+I profiled all six tables before changing anything, loading every column as a string so no problem was silently converted away. That found **21 data-quality issues** (10 high, 8 medium, 3 low). One table, `content`, passed every check.
+
+**High-severity findings, meaning ones that would change a conclusion if left in:**
+
+| # | Issue | Evidence | Impact if ignored |
+|---|---|---|---|
+| 17 | **Survey reverse-items double-reversed.** The new backend stores q04/q08/q12/q16 already reversed, but the spec says to reverse them. | Item-rest correlation −0.57 for the reverse items (v2 only) vs +0.45 for the others; +0.67 for all items once corrected | Pillar score spread shrinks by ~⅓ and wellbeing effects are biased toward zero |
+| 20 | **Sample Ratio Mismatch in the A/B test.** Treatment users on Android 5.1.0 never had an assignment logged. | 2,241 vs 1,986 (p ≈ 9e-5); all 189 missing users started the *new* onboarding and left after ~3 events; split rebuilt from the onboarding flow is balanced (p ≈ 0.32) | A naive comparison silently drops treatment users who failed in the new flow, so the treatment looks better than it was |
+| 12 | **iOS tracking gap, Oct 5–12.** App 5.2.0 didn't send `practice_complete`. | Starts were steady; completes fell from ~730/day to ~90/day; 6,254 starts vs 0 completes on 5.2.0 | Read as an engagement drop when it's an instrumentation bug |
+| 5 | **6 internal test accounts** | Undocumented channel, no signup flow, 80–300 practices/day of ~5s | 15.7% of all practice-complete events; caused a fake late-August spike |
+| 7 | **Schema drift between tracking plans v1 and v2** | Event names, JSON keys and units changed (seconds → milliseconds) | ~36k practices lost by filtering on the v2 name; durations off by 1000× |
+| 6 | **Legacy timestamps in local time with no timezone** | 31,891 events in a different format, all from before the migration | Events land on the wrong day and wrong hour |
+| 8 | **Duplicate events from client retries** | 10,691 near-duplicates within 3 seconds, 71% on Android | Inflated counts, biased platform comparisons |
+| 1 | **Legacy users duplicated by the migration** | 140 duplicated IDs | Joins double-count users |
+
+**Medium and low** issues include: structurally missing onboarding answers; a legacy survey wave label (`intake` = `baseline`); invalid item codes (99, 0, 6); 380 duplicate survey submissions; 453 low-effort responses (straight-lined *and* under 40 seconds); 28 users assigned to both variants; clock-skewed events dated 2001/2027; and ad platforms over-attributing installs by 13–15%.
+
+**What I learned:** the most damaging issues didn't raise errors. Values that parse fine, scores that look plausible, and an A/B split that's only 6% off can each change a conclusion. The checks that caught them were *consistency* checks: items within a scale should agree, starts and completes should move together, and the experiment split should match the design.
 
 ### Step 2: Cleaning and standardization
 _To be added._
