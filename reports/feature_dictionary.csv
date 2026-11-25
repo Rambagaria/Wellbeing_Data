@@ -1,0 +1,104 @@
+feature,group,window,dtype,pct_null
+practice_days_w1,A_habit_volume,days 0-6,int64,0.0
+minutes_w1,A_habit_volume,days 0-6,float64,0.0
+has_practice_w1,A_habit_volume,days 0-6,bool,0.0
+avg_minutes_per_practice_w1,A_habit_volume,days 0-6,float64,17.8
+had_second_practice_w1,A_habit_volume,days 0-6,bool,0.0
+days_to_second_practice_w1,A_habit_volume,days 0-6,float64,0.0
+longest_streak_w1,A_habit_volume,days 0-6,int64,0.0
+preferred_time_w1,A_habit_volume,days 0-6,object,0.0
+pct_morning_w1,A_habit_volume,days 0-6,float64,17.8
+pct_lesson_w1,C_content,days 0-6,float64,59.8
+pct_seated_meditation_w1,C_content,days 0-6,float64,59.8
+pct_active_meditation_w1,C_content,days 0-6,float64,59.8
+pct_short_w1,C_content,days 0-6,float64,59.8
+pct_lesson_d0_27,C_content,days 0-27,float64,50.7
+pct_seated_meditation_d0_27,C_content,days 0-27,float64,50.7
+pct_active_meditation_d0_27,C_content,days 0-27,float64,50.7
+pct_awareness_d0_27,C_content,days 0-27,float64,50.7
+pct_connection_d0_27,C_content,days 0-27,float64,50.7
+pct_insight_d0_27,C_content,days 0-27,float64,50.7
+pct_purpose_d0_27,C_content,days 0-27,float64,50.7
+pct_short_d0_27,C_content,days 0-27,float64,50.7
+set_reminder,D_habit_cues,signup / full history,bool,0.0
+reminder_slot,D_habit_cues,signup / full history,object,70.6
+notification_opens_w1,D_habit_cues,days 0-6,float64,70.6
+pct_sessions_from_notification_w1,D_habit_cues,days 0-6,float64,70.6
+practice_near_reminder_w1,D_habit_cues,days 0-6,float64,74.7
+opted_out,D_habit_cues,signup / full history,bool,0.0
+opt_out_day,D_habit_cues,signup / full history,float64,98.6
+opted_out_w1,D_habit_cues,days 0-6,bool,0.0
+funnel_stage_day0,E_activation,day 0,object,0.0
+completed_onboarding,E_activation,signup / full history,bool,0.0
+onboarding_seconds,E_activation,signup / full history,float64,14.6
+first_practice_bucket_w1,E_activation,days 0-6,object,0.0
+days_to_first_practice,E_activation,signup / full history,float64,0.0
+first_practice_observed,E_activation,signup / full history,bool,0.0
+first_practice_length_min,E_activation,signup / full history,float64,11.5
+first_practice_type,E_activation,signup / full history,object,0.0
+first_practice_completed,E_activation,signup / full history,object,11.5
+practices_day0,E_activation,day 0,int64,0.0
+current_streak_end_w1,F_trajectory,days 0-6,int64,0.0
+late_minus_early_rate_w1,F_trajectory,days 0-6,float64,0.0
+last_active_day_w1,F_trajectory,days 0-6,float64,16.1
+practice_days_wk1,F_trajectory,weekly,int64,0.0
+practice_days_wk2,F_trajectory,weekly,int64,0.0
+practice_days_wk3,F_trajectory,weekly,int64,0.0
+practice_days_wk4,F_trajectory,weekly,int64,0.0
+trend_wk1_wk4,F_trajectory,weekly,float64,0.0
+practice_days_d0_27,F_trajectory,days 0-27,int64,0.0
+minutes_d0_27,F_trajectory,days 0-27,float64,0.0
+practice_days_d0_55,F_trajectory,days 0-55,int64,0.0
+signup_ts,G_profile_wellbeing,signup / full history,"datetime64[ns, UTC]",0.0
+platform,G_profile_wellbeing,signup / full history,object,0.0
+signup_app_version,G_profile_wellbeing,signup / full history,object,0.0
+country,G_profile_wellbeing,signup / full history,object,0.0
+age_band,G_profile_wellbeing,signup / full history,object,0.0
+gender,G_profile_wellbeing,signup / full history,object,0.0
+acquisition_channel,G_profile_wellbeing,signup / full history,object,0.0
+meditation_experience,G_profile_wellbeing,signup / full history,object,0.0
+primary_goal,G_profile_wellbeing,signup / full history,object,0.0
+source_system,G_profile_wellbeing,signup / full history,object,0.0
+flourishing_base,G_profile_wellbeing,baseline survey,float64,28.6
+awareness_base,G_profile_wellbeing,baseline survey,float64,28.3
+connection_base,G_profile_wellbeing,baseline survey,float64,28.3
+insight_base,G_profile_wellbeing,baseline survey,float64,28.3
+purpose_base,G_profile_wellbeing,baseline survey,float64,28.4
+phq4_total_base,G_profile_wellbeing,baseline survey,float64,32.0
+flourishing_w4,G_profile_wellbeing,week-4 survey,float64,82.2
+awareness_w4,G_profile_wellbeing,week-4 survey,float64,82.1
+connection_w4,G_profile_wellbeing,week-4 survey,float64,82.1
+insight_w4,G_profile_wellbeing,week-4 survey,float64,82.1
+purpose_w4,G_profile_wellbeing,week-4 survey,float64,82.1
+phq4_total_w4,G_profile_wellbeing,week-4 survey,float64,83.0
+flourishing_w8,G_profile_wellbeing,week-8 survey,float64,91.1
+awareness_w8,G_profile_wellbeing,week-8 survey,float64,91.1
+connection_w8,G_profile_wellbeing,week-8 survey,float64,91.1
+insight_w8,G_profile_wellbeing,week-8 survey,float64,91.1
+purpose_w8,G_profile_wellbeing,week-8 survey,float64,91.1
+phq4_total_w8,G_profile_wellbeing,week-8 survey,float64,91.6
+flourishing_change_w4,G_profile_wellbeing,week-4 survey,float64,86.8
+flourishing_change_w8,G_profile_wellbeing,week-8 survey,float64,93.5
+awareness_change_w4,G_profile_wellbeing,week-4 survey,float64,86.7
+awareness_change_w8,G_profile_wellbeing,week-8 survey,float64,93.4
+connection_change_w4,G_profile_wellbeing,week-4 survey,float64,86.7
+connection_change_w8,G_profile_wellbeing,week-8 survey,float64,93.4
+insight_change_w4,G_profile_wellbeing,week-4 survey,float64,86.7
+insight_change_w8,G_profile_wellbeing,week-8 survey,float64,93.4
+purpose_change_w4,G_profile_wellbeing,week-4 survey,float64,86.7
+purpose_change_w8,G_profile_wellbeing,week-8 survey,float64,93.4
+phq4_total_change_w4,G_profile_wellbeing,week-4 survey,float64,88.0
+phq4_total_change_w8,G_profile_wellbeing,week-8 survey,float64,94.1
+has_base,G_profile_wellbeing,baseline survey,bool,0.0
+has_w4,G_profile_wellbeing,week-4 survey,bool,0.0
+has_w8,G_profile_wellbeing,week-8 survey,bool,0.0
+obs_days,outcomes_windows,signup / full history,int64,0.0
+d7_observable,outcomes_windows,signup / full history,bool,0.0
+d28_observable,outcomes_windows,signup / full history,bool,0.0
+retained_d7,outcomes_windows,signup / full history,bool,0.0
+retained_d28,outcomes_windows,signup / full history,object,12.3
+last_practice_day,outcomes_windows,signup / full history,float64,15.2
+churned,outcomes_windows,signup / full history,bool,0.0
+survival_days,outcomes_windows,signup / full history,float64,0.0
+variant,outcomes_windows,signup / full history,object,70.6
+assignment_logged,outcomes_windows,signup / full history,object,70.6
